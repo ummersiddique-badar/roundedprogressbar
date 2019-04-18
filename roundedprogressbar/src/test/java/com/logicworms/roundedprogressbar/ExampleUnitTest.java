@@ -1,4 +1,4 @@
-package com.logicworms.roundedprogressbarexample;
+package com.logicworms.roundedprogressbar;
 
 import org.junit.Test;
 
