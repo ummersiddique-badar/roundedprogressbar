@@ -5,12 +5,11 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.widget.TextView;
 
 import com.logicworms.roundedprogressbar.utils.TimeUtils;
 
-import androidx.appcompat.widget.AppCompatTextView;
-
-public class RemainingTimeTextView extends AppCompatTextView {
+public class RemainingTimeTextView extends TextView {
 
     private static final long DELAY_MILLIS = 10;
     private static final int DEFAULT_LATE_TIME = 300;

@@ -9,27 +9,6 @@ import java.util.Locale;
 
 public class TimeUtils {
 
-    public static final String DATE = "18/Apr/2019";
-    public static final String TIME = "01:55 PM";
-
-    public static String getFormattedTimeRemaining(String date, String time) {
-        int difference = getTimeDifference(DATE, TIME);
-        return formatTime(difference);
-    }
-
-    public static int getTimeDifference(String orderDate, String orderTime) {
-        String time = orderDate.trim() + " " + orderTime.trim();
-        DateFormat format = new SimpleDateFormat("dd/MMM/yyyy hh:mm a", Locale.ENGLISH);
-        Date target;
-        try {
-            target = format.parse(time);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return 0;
-        }
-        return (int) ((target.getTime() - (System.currentTimeMillis())) / 1000);
-    }
-
     public static int getDifferenceFromTargetTime(String orderDate, String orderTime) {
         String time = orderDate.trim() + " " + orderTime.trim();
         DateFormat format = new SimpleDateFormat("dd/MMM/yyyy hh:mm a", Locale.ENGLISH);
@@ -62,7 +41,6 @@ public class TimeUtils {
                 formatted = formatter.format("%s and %s left to fulfill order", formattedHours, formattedMins).toString();
             else formatted = formatter.format("%s left to fulfill order", formattedMins).toString();
         }
-//        Log.i(TAG, "Time : " + formatted);
         return formatted;
     }
 
