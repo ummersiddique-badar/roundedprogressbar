@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RoundedProgressBar</string>
+    <string name="too_much_late">Too Late</string>
 </resources>

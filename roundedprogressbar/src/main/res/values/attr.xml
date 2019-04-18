@@ -17,4 +17,9 @@
         <attr name="rcThirdColor" format="color" />
         <attr name="rcTime" format="integer" />
     </declare-styleable>
+    <declare-styleable name="RemainingTimeTextView">
+        <attr name="firstColor" format="color" />
+        <attr name="secondColor" format="color" />
+        <attr name="tooLateText" format="string" />
+    </declare-styleable>
 </resources>
