@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Time Finished", Toast.LENGTH_SHORT).show();
             }
         });
-        orderProgressBar.setCurrentProgress(180);
+        orderProgressBar.setCurrentProgress(305);
 
         RemainingTimeTextView textView = findViewById(R.id.textView);
         String DATE = "18/Apr/2019";

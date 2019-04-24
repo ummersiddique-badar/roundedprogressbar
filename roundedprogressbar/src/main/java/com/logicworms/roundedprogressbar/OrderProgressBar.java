@@ -16,8 +16,8 @@ public class OrderProgressBar extends LinearLayout {
 
     public static final int DEF_TIME = 60 * 5;
     public static final int DELAY_MILLIS = 1000;
-    private static final int MARGIN = 20;
     private static final int MAX_PROGRESS = 60;
+    private int margin = 20;
     int totalProgress;
     int currentProgress = 0;
     private int colorFirst;
@@ -42,6 +42,11 @@ public class OrderProgressBar extends LinearLayout {
         super(context, attrs, defStyleAttr);
         this.context = context;
         init(attrs);
+    }
+
+    public void setMargin(int margin) {
+        if (margin < 0 || margin > 50)
+            this.margin = margin;
     }
 
     public void setCurrentProgress(int currentProgress) {
@@ -77,7 +82,7 @@ public class OrderProgressBar extends LinearLayout {
             public void run() {
                 setProgress();
                 currentProgress++;
-                if (currentProgress <= totalProgress + MARGIN)
+                if (currentProgress <= totalProgress + margin)
                     handler.postDelayed(this, DELAY_MILLIS);
             }
         }, DELAY_MILLIS);
@@ -100,34 +105,33 @@ public class OrderProgressBar extends LinearLayout {
                 setProgress(progressbar1, progress);
                 break;
             case 1:
-                setProgress(progressbar1,MAX_PROGRESS);
+                setProgress(progressbar1, MAX_PROGRESS);
                 setProgress(progressbar2, progress);
                 break;
             case 2:
-                setProgress(progressbar1,MAX_PROGRESS);
-                setProgress(progressbar2,MAX_PROGRESS);
+                setProgress(progressbar1, MAX_PROGRESS);
+                setProgress(progressbar2, MAX_PROGRESS);
                 setProgress(progressbar3, progress);
                 break;
             case 3:
-                setProgress(progressbar1,MAX_PROGRESS);
-                setProgress(progressbar2,MAX_PROGRESS);
-                setProgress(progressbar3,MAX_PROGRESS);
+                setProgress(progressbar1, MAX_PROGRESS);
+                setProgress(progressbar2, MAX_PROGRESS);
+                setProgress(progressbar3, MAX_PROGRESS);
                 setProgress(progressbar4, progress);
                 break;
             case 4:
-                setProgress(progressbar1,MAX_PROGRESS);
-                setProgress(progressbar2,MAX_PROGRESS);
-                setProgress(progressbar3,MAX_PROGRESS);
-                setProgress(progressbar4,MAX_PROGRESS);
+                setProgress(progressbar1, MAX_PROGRESS);
+                setProgress(progressbar2, MAX_PROGRESS);
+                setProgress(progressbar3, MAX_PROGRESS);
+                setProgress(progressbar4, MAX_PROGRESS);
                 setProgress(progressbar5, progress);
                 break;
             case 5:
-                setProgress(progressbar1,MAX_PROGRESS);
-                setProgress(progressbar2,MAX_PROGRESS);
-                setProgress(progressbar3,MAX_PROGRESS);
-                setProgress(progressbar4,MAX_PROGRESS);
-                setProgress(progressbar5,MAX_PROGRESS);
-                println("Margin : " + progress);
+                setProgress(progressbar1, MAX_PROGRESS);
+                setProgress(progressbar2, MAX_PROGRESS);
+                setProgress(progressbar3, MAX_PROGRESS);
+                setProgress(progressbar4, MAX_PROGRESS);
+                setProgress(progressbar5, MAX_PROGRESS);
                 break;
         }
 
@@ -151,12 +155,12 @@ public class OrderProgressBar extends LinearLayout {
             if (currentProgress == 240)
                 onInterval(4);
         }
-        if (currentProgress > 240 && currentProgress <= totalProgress) {
+        if (currentProgress > 240 && currentProgress <= totalProgress + margin) {
             setColor(colorThird);
             if (currentProgress == totalProgress)
                 onInterval(5);
         }
-        if (currentProgress == totalProgress + MARGIN)
+        if (currentProgress == totalProgress + margin)
             onTimeFinished();
     }
 
