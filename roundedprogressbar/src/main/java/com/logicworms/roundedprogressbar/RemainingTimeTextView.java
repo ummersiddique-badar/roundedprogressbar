@@ -5,13 +5,14 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.logicworms.roundedprogressbar.utils.TimeUtils;
 
 public class RemainingTimeTextView extends TextView {
 
-    private static final long DELAY_MILLIS = 10;
+    private static final long DELAY_MILLIS = 1000;
     private static final int DEFAULT_LATE_TIME = 300;
     private static final String TAG = RemainingTimeTextView.class.getSimpleName();
     Handler handler;
@@ -33,14 +34,20 @@ public class RemainingTimeTextView extends TextView {
             setText(text);
             if (currentTime <= (targetTime + maxLateTime)) {
                 handler.postDelayed(this, DELAY_MILLIS);
-
-                minuteListener.onMinuteChanged(time);
+                if (minuteListener != null)
+                    minuteListener.onMinuteChanged(time);
             } else {
                 setText(textTooLate);
             }
-            if (time > 5)
+            if (time > 5 * 60) {
+                Log.i(TAG, "Time : " + time);
+                Log.i(TAG, "Color  : first color");
                 setTextColor(colorFirst);
-            else setTextColor(colorSecond);
+            } else {
+                setTextColor(colorSecond);
+                Log.i(TAG, "Time : " + time);
+                Log.i(TAG, "Color  : Second color");
+            }
         }
     };
 

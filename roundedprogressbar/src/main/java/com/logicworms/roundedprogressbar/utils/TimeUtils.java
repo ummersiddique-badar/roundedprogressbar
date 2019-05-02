@@ -3,24 +3,50 @@ package com.logicworms.roundedprogressbar.utils;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Formatter;
 import java.util.Locale;
 
 public class TimeUtils {
 
-    public static int getDifferenceFromTargetTime(String orderDate, String orderTime) {
-        String time = orderDate.trim() + " " + orderTime.trim();
-        DateFormat format = new SimpleDateFormat("dd/MMM/yyyy hh:mm a", Locale.ENGLISH);
-        Date date;
+    public static int getDifferenceFromTargetTime(String orderDate, String orderTime, int waitingHour, int waitingMinute) {
+
+        Date date = getFormattedDate(orderDate,orderTime);
+
+        Calendar orderTimeCalendar = Calendar.getInstance();
+        Calendar estimateTimeCalendar = getEstimateTimeCalendar(date, waitingHour, waitingMinute);
+
+        return (int) ((estimateTimeCalendar.getTimeInMillis() - orderTimeCalendar.getTimeInMillis()) / 1000);
+    }
+
+    private static Date getFormattedDate(String date, String time) {
+        String formatted = date.trim() + " " + time.trim();
+        DateFormat format = new SimpleDateFormat("dd/MMM/yyyy hh:mm a", Locale.US);
+        Date formattedDate;
         try {
-            date = format.parse(time);
+            formattedDate = format.parse(formatted);
         } catch (ParseException e) {
             e.printStackTrace();
-            return 0;
+            return new Date();
         }
-        return (int) ((date.getTime() - System.currentTimeMillis()) / 1000);
+        return formattedDate;
     }
+
+    private static Calendar getCalendar(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal;
+    }
+
+    private static Calendar getEstimateTimeCalendar(Date date, int waitingHour, int waitingMinute) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.HOUR, waitingHour);
+        cal.add(Calendar.MINUTE, waitingMinute);
+        return cal;
+    }
+
 
     public static String formatTime(int difference) {
         int hours = difference / 3600;

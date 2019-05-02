@@ -1,6 +1,7 @@
 package com.logicworms.roundedprogressbar;
 
 import com.logicworms.roundedprogressbar.utils.TimeUtils;
+import com.logicworms.roundedprogressbar.utils.WaitingTime;
 
 import org.junit.Test;
 
@@ -37,9 +38,13 @@ public class UnitTest {
     }
 
     private void startTest() {
-        String DATE = "18/Apr/2019";
-        String TIME = "06:30 PM";
-        int targetTime = TimeUtils.getDifferenceFromTargetTime(DATE, TIME);
+        String DATE = "02/May/2019";
+        String TIME = "10:35 AM";
+
+        WaitingTime waitingTime = new WaitingTime();
+        waitingTime.hour = 0;
+        waitingTime.minute = 15;
+        int targetTime = TimeUtils.getDifferenceFromTargetTime(DATE, TIME,waitingTime.hour,waitingTime.minute   );
         println("Difference : " + targetTime);
         String formatted = TimeUtils.formatTime(targetTime);
         println(formatted);

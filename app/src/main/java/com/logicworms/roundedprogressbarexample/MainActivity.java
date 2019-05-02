@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.logicworms.roundedprogressbar.OrderProgressBar;
 import com.logicworms.roundedprogressbar.RemainingTimeTextView;
 import com.logicworms.roundedprogressbar.utils.TimeUtils;
+import com.logicworms.roundedprogressbar.utils.WaitingTime;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,17 +35,14 @@ public class MainActivity extends AppCompatActivity {
         orderProgressBar.setCurrentProgress(305);
 
         RemainingTimeTextView textView = findViewById(R.id.textView);
-        String DATE = "18/Apr/2019";
-        String TIME = "10:00 PM";
-        int targetTime = TimeUtils.getDifferenceFromTargetTime(DATE, TIME);
+        String DATE = "02/May/2019";
+        String TIME = "2:54 PM";
+        WaitingTime waitingTime = new WaitingTime();
+        waitingTime.hour = 0;
+        waitingTime.minute = 15;
+        int targetTime = TimeUtils.getDifferenceFromTargetTime(DATE, TIME,waitingTime.hour,waitingTime.minute   );
         Log.i(TAG, "Target Time : " + targetTime);
         textView.setTargetTime(targetTime);
         textView.setMaxLateTime(600);
-        textView.setMinuteChangeListener(new RemainingTimeTextView.OnMinuteChangeListener() {
-            @Override
-            public void onMinuteChanged(int minute) {
-                Log.i(TAG, "Minute : " + minute);
-            }
-        });
     }
 }
