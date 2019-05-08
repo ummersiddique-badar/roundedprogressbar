@@ -6,6 +6,8 @@ import android.content.res.TypedArray;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
+import android.view.WindowInsets;
 import android.widget.TextView;
 
 import com.logicworms.roundedprogressbar.utils.TimeUtils;
@@ -72,8 +74,18 @@ public class RemainingTimeTextView extends TextView {
     public void setTargetTime(int targetTime) {
         this.targetTime = targetTime;
         currentTime = 0;
-        handler.removeCallbacks(timer);
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
         handler.postDelayed(timer, DELAY_MILLIS);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        handler.removeCallbacks(timer);
     }
 
     /**

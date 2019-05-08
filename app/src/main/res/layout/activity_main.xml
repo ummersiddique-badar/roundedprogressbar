@@ -25,10 +25,43 @@
         android:layout_marginTop="200dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:text="asdfadfasdfasd"
         app:firstColor="@color/colorYellowDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tooLateText="@string/too_much_late"
-        app:secondColor="@color/colorRed" />
+        app:secondColor="@color/colorRed"
+        app:tooLateText="@string/too_much_late" />
+
+    <com.logicworms.roundedprogressbar.RemainingTimeTextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="asdfadfasdfasd"
+        app:firstColor="@color/colorYellowDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:secondColor="@color/colorRed"
+        app:tooLateText="@string/too_much_late" />
+
+    <com.logicworms.roundedprogressbar.RemainingTimeTextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="asdfadfasdfasd"
+        app:firstColor="@color/colorYellowDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:secondColor="@color/colorRed"
+        app:tooLateText="@string/too_much_late" />
 </androidx.constraintlayout.widget.ConstraintLayout>
