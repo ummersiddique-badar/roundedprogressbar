@@ -91,13 +91,15 @@ public class OrderProgressBar extends LinearLayout {
     }
 
     @Override
-    public void onVisibilityAggregated(boolean isVisible) {
-        super.onVisibilityAggregated(isVisible);
-        if (isVisible) {
-            handler.post(timer);
-        } else {
-            handler.removeCallbacks(timer);
-        }
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        handler.postDelayed(timer, DELAY_MILLIS);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        handler.removeCallbacks(timer);
     }
 
     private void setMax() {
