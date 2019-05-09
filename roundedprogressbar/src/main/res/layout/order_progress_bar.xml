@@ -8,35 +8,35 @@
 
     <com.logicworms.roundedprogressbar.RoundCornerProgressBar
         app:rcRadius="2dp"
-        android:id="@+id/progressbar1"
+        android:id="@+id/roundProgressBar1"
         android:layout_width="50dp"
         android:layout_height="10dp"
         android:layout_margin="1dp" />
 
     <com.logicworms.roundedprogressbar.RoundCornerProgressBar
         app:rcRadius="2dp"
-        android:id="@+id/progressbar2"
+        android:id="@+id/roundProgressBar2"
         android:layout_width="50dp"
         android:layout_height="10dp"
         android:layout_margin="1dp" />
 
     <com.logicworms.roundedprogressbar.RoundCornerProgressBar
         app:rcRadius="2dp"
-        android:id="@+id/progressbar3"
+        android:id="@+id/roundProgressBar3"
         android:layout_width="50dp"
         android:layout_height="10dp"
         android:layout_margin="1dp" />
 
     <com.logicworms.roundedprogressbar.RoundCornerProgressBar
         app:rcRadius="2dp"
-        android:id="@+id/progressbar4"
+        android:id="@+id/roundProgressBar4"
         android:layout_width="50dp"
         android:layout_height="10dp"
         android:layout_margin="1dp" />
 
     <com.logicworms.roundedprogressbar.RoundCornerProgressBar
         app:rcRadius="2dp"
-        android:id="@+id/progressbar5"
+        android:id="@+id/roundProgressBar5"
         android:layout_width="50dp"
         android:layout_height="10dp"
         android:layout_margin="1dp" />

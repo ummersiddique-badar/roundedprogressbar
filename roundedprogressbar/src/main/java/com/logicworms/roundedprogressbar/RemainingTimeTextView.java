@@ -6,8 +6,6 @@ import android.content.res.TypedArray;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
-import android.view.WindowInsets;
 import android.widget.TextView;
 
 import com.logicworms.roundedprogressbar.utils.TimeUtils;
@@ -42,12 +40,12 @@ public class RemainingTimeTextView extends TextView {
                 setText(textTooLate);
             }
             if (time > 5 * 60) {
-                Log.i(TAG, "Time : " + time);
+                Log.i(TAG, this + "Time : " + time);
                 Log.i(TAG, "Color  : first color");
                 setTextColor(colorFirst);
             } else {
                 setTextColor(colorSecond);
-                Log.i(TAG, "Time : " + time);
+                Log.i(TAG, this + "Time : " + time);
                 Log.i(TAG, "Color  : Second color");
             }
         }
@@ -77,15 +75,13 @@ public class RemainingTimeTextView extends TextView {
     }
 
     @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        handler.postDelayed(timer, DELAY_MILLIS);
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        handler.removeCallbacks(timer);
+    public void onVisibilityAggregated(boolean isVisible) {
+        super.onVisibilityAggregated(isVisible);
+        if (isVisible) {
+            handler.post(timer);
+        } else {
+            handler.removeCallbacks(timer);
+        }
     }
 
     /**

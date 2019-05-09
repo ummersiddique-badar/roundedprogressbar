@@ -5,21 +5,22 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
-
-import static java.sql.DriverManager.println;
 
 public class OrderProgressBar extends LinearLayout {
 
     public static final int DEF_TIME = 60 * 5;
     public static final int DELAY_MILLIS = 1000;
     private static final int MAX_PROGRESS = 60;
-    private int margin = 20;
+    private static final String TAG = OrderProgressBar.class.getSimpleName();
+    final Handler handler;
     int totalProgress;
     int currentProgress = 0;
+    private int margin = 0;
     private int colorFirst;
     private int colorSecond;
     private int colorThird;
@@ -30,6 +31,17 @@ public class OrderProgressBar extends LinearLayout {
     private RoundCornerProgressBar progressbar5;
     private Context context;
     private TimeOverListener listener;
+    Runnable timer = new Runnable() {
+        @Override
+        public void run() {
+            setProgress();
+            currentProgress++;
+            Log.i(TAG, "Current progress : " + currentProgress);
+            if (currentProgress <= totalProgress + margin)
+                handler.postDelayed(this, DELAY_MILLIS);
+        }
+    };
+
     public OrderProgressBar(Context context) {
         this(context, null);
     }
@@ -41,12 +53,12 @@ public class OrderProgressBar extends LinearLayout {
     public OrderProgressBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
+        handler = new Handler();
         init(attrs);
     }
 
     public void setMargin(int margin) {
-        if (margin < 0 || margin > 50)
-            this.margin = margin;
+        this.margin = margin;
     }
 
     public void setCurrentProgress(int currentProgress) {
@@ -66,26 +78,26 @@ public class OrderProgressBar extends LinearLayout {
 
         setOrientation(HORIZONTAL);
         LayoutInflater.from(getContext()).inflate(R.layout.order_progress_bar, this);
-        progressbar1 = findViewById(R.id.progressbar1);
-        progressbar2 = findViewById(R.id.progressbar2);
-        progressbar3 = findViewById(R.id.progressbar3);
-        progressbar4 = findViewById(R.id.progressbar4);
-        progressbar5 = findViewById(R.id.progressbar5);
+        progressbar1 = findViewById(R.id.roundProgressBar1);
+        progressbar2 = findViewById(R.id.roundProgressBar2);
+        progressbar3 = findViewById(R.id.roundProgressBar3);
+        progressbar4 = findViewById(R.id.roundProgressBar4);
+        progressbar5 = findViewById(R.id.roundProgressBar5);
         startTime();
     }
 
     private void startTime() {
         setMax();
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                setProgress();
-                currentProgress++;
-                if (currentProgress <= totalProgress + margin)
-                    handler.postDelayed(this, DELAY_MILLIS);
-            }
-        }, DELAY_MILLIS);
+    }
+
+    @Override
+    public void onVisibilityAggregated(boolean isVisible) {
+        super.onVisibilityAggregated(isVisible);
+        if (isVisible) {
+            handler.post(timer);
+        } else {
+            handler.removeCallbacks(timer);
+        }
     }
 
     private void setMax() {
