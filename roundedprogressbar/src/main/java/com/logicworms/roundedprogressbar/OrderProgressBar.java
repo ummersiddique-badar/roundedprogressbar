@@ -117,21 +117,31 @@ public class OrderProgressBar extends LinearLayout {
         switch (completedBars) {
             case 0:
                 setProgress(progressbar1, progress);
+                progressbar2.setProgress(0);
+                progressbar3.setProgress(0);
+                progressbar4.setProgress(0);
+                progressbar5.setProgress(0);
                 break;
             case 1:
                 setProgress(progressbar1, MAX_PROGRESS);
                 setProgress(progressbar2, progress);
+                progressbar3.setProgress(0);
+                progressbar4.setProgress(0);
+                progressbar5.setProgress(0);
                 break;
             case 2:
                 setProgress(progressbar1, MAX_PROGRESS);
                 setProgress(progressbar2, MAX_PROGRESS);
                 setProgress(progressbar3, progress);
+                progressbar4.setProgress(0);
+                progressbar5.setProgress(0);
                 break;
             case 3:
                 setProgress(progressbar1, MAX_PROGRESS);
                 setProgress(progressbar2, MAX_PROGRESS);
                 setProgress(progressbar3, MAX_PROGRESS);
                 setProgress(progressbar4, progress);
+                progressbar5.setProgress(0);
                 break;
             case 4:
                 setProgress(progressbar1, MAX_PROGRESS);
